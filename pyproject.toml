@@ -27,12 +27,24 @@ classifiers = [
 ]
 dependencies = []
 
+[project.optional-dependencies]
+http = [
+    "astropy>=5.0",
+    "numpy>=1.20",
+    "Pillow>=9.0",
+    "matplotlib>=3.5",
+]
+
 [project.urls]
 Homepage = "https://github.com/benny/ds9-web"
 Issues = "https://github.com/benny/ds9-web/issues"
 
 [project.scripts]
 ds9-web = "ds9_web.cli:main"
+ds9-http = "ds9_http.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+ds9_http = ["static/*.html", "static/*.css", "static/*.js"]

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SAOImage DS9 (HTTP)</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <!-- Menu bar (DS9 order) -->
+  <nav id="menubar">
+    <div class="menu" data-menu="file">File
+      <ul>
+        <li data-action="file.open">Open…</li>
+        <li class="sep"></li>
+        <li data-action="file.header">Display FITS Header…</li>
+        <li data-action="file.save-png">Save Image as PNG…</li>
+        <li class="sep"></li>
+        <li data-action="file.close">Close</li>
+        <li data-action="file.exit">Exit</li>
+      </ul>
+    </div>
+    <div class="menu" data-menu="edit">Edit
+      <ul>
+        <li data-action="edit.undo">Undo</li>
+        <li class="sep"></li>
+        <li data-action="edit.mode.none">Mode: None</li>
+        <li data-action="edit.mode.region">Mode: Region</li>
+        <li data-action="edit.mode.crosshair">Mode: Crosshair</li>
+        <li data-action="edit.mode.pan">Mode: Pan</li>
+        <li data-action="edit.mode.zoom">Mode: Zoom</li>
+        <li class="sep"></li>
+        <li data-action="edit.prefs">Preferences…</li>
+      </ul>
+    </div>
+    <div class="menu" data-menu="view">View
+      <ul>
+        <li data-action="view.toggle.info">Information Panel</li>
+        <li data-action="view.toggle.panner">Panner</li>
+        <li data-action="view.toggle.magnifier">Magnifier</li>
+        <li data-action="view.toggle.colorbar">Color Bar</li>
+        <li data-action="view.toggle.buttons">Button Bar</li>
+      </ul>
+    </div>
+    <div class="menu" data-menu="frame">Frame
+      <ul>
+        <li data-action="frame.new">New Frame</li>
+        <li data-action="frame.delete">Delete Frame</li>
+        <li data-action="frame.clear">Clear Frame</li>
+        <li data-action="frame.reset">Reset Frame</li>
+      </ul>
+    </div>
+    <div class="menu" data-menu="bin">Bin
+      <ul>
+        <li data-action="bin.1">1x1</li>
+        <li data-action="bin.2">2x2</li>
+        <li data-action="bin.4">4x4</li>
+        <li data-action="bin.8">8x8</li>
+      </ul>
+    </div>
+    <div class="menu" data-menu="zoom">Zoom
+      <ul>
+        <li data-action="zoom.in">Zoom In</li>
+        <li data-action="zoom.out">Zoom Out</li>
+        <li data-action="zoom.fit">Zoom Fit</li>
+        <li class="sep"></li>
+        <li data-action="zoom.1">Zoom 1</li>
+        <li data-action="zoom.2">Zoom 2</li>
+        <li data-action="zoom.4">Zoom 4</li>
+        <li data-action="zoom.8">Zoom 8</li>
+        <li data-action="zoom.16">Zoom 16</li>
+        <li data-action="zoom.0.5">Zoom 1/2</li>
+        <li data-action="zoom.0.25">Zoom 1/4</li>
+        <li class="sep"></li>
+        <li data-action="zoom.align">Align (North)</li>
+        <li data-action="zoom.rotate.90">Rotate 90°</li>
+        <li data-action="zoom.rotate.-90">Rotate -90°</li>
+      </ul>
+    </div>
+    <div class="menu" data-menu="scale">Scale
+      <ul>
+        <li data-action="scale.func.linear">Linear</li>
+        <li data-action="scale.func.log">Log</li>
+        <li data-action="scale.func.power">Power</li>
+        <li data-action="scale.func.sqrt">Square Root</li>
+        <li data-action="scale.func.squared">Squared</li>
+        <li data-action="scale.func.asinh">Asinh</li>
+        <li data-action="scale.func.sinh">Sinh</li>
+        <li data-action="scale.func.histequ">Histogram Equalization</li>
+        <li class="sep"></li>
+        <li data-action="scale.lim.minmax">Min Max</li>
+        <li data-action="scale.lim.zscale">ZScale</li>
+        <li data-action="scale.lim.99.5">99.5%</li>
+        <li data-action="scale.lim.99">99%</li>
+        <li data-action="scale.lim.98">98%</li>
+        <li data-action="scale.lim.97">97%</li>
+        <li data-action="scale.lim.95">95%</li>
+        <li data-action="scale.lim.90">90%</li>
+        <li class="sep"></li>
+        <li data-action="scale.limits">Scale Limits…</li>
+      </ul>
+    </div>
+    <div class="menu" data-menu="color">Color
+      <ul>
+        <li data-action="cmap.grey">grey</li>
+        <li data-action="cmap.red">red</li>
+        <li data-action="cmap.green">green</li>
+        <li data-action="cmap.blue">blue</li>
+        <li class="sep"></li>
+        <li data-action="cmap.a">a</li>
+        <li data-action="cmap.b">b</li>
+        <li data-action="cmap.bb">bb</li>
+        <li data-action="cmap.he">he</li>
+        <li data-action="cmap.heat">heat</li>
+        <li data-action="cmap.cool">cool</li>
+        <li data-action="cmap.rainbow">rainbow</li>
+        <li data-action="cmap.sls">sls</li>
+        <li data-action="cmap.hsv">hsv</li>
+        <li data-action="cmap.viridis">viridis</li>
+        <li data-action="cmap.plasma">plasma</li>
+        <li data-action="cmap.magma">magma</li>
+        <li class="sep"></li>
+        <li data-action="cmap.invert">Invert Color Map</li>
+      </ul>
+    </div>
+    <div class="menu" data-menu="region">Region
+      <ul>
+        <li data-action="region.shape.circle">Shape: Circle</li>
+        <li data-action="region.shape.box">Shape: Box</li>
+        <li data-action="region.shape.ellipse">Shape: Ellipse</li>
+        <li data-action="region.shape.polygon">Shape: Polygon</li>
+        <li data-action="region.shape.point">Shape: Point</li>
+        <li class="sep"></li>
+        <li data-action="region.delete-all">Delete All Regions</li>
+        <li data-action="region.list">List Regions…</li>
+      </ul>
+    </div>
+    <div class="menu" data-menu="wcs">WCS
+      <ul>
+        <li data-action="wcs.fk5">FK5 (J2000)</li>
+        <li data-action="wcs.icrs">ICRS</li>
+        <li data-action="wcs.galactic">Galactic</li>
+        <li data-action="wcs.format.sex">Format: Sexagesimal</li>
+        <li data-action="wcs.format.deg">Format: Degrees</li>
+      </ul>
+    </div>
+    <div class="menu" data-menu="analysis">Analysis
+      <ul>
+        <li data-action="analysis.stats">Statistics…</li>
+        <li data-action="analysis.hist">Histogram…</li>
+        <li data-action="analysis.radial">Radial Profile…</li>
+        <li data-action="analysis.contour">Contours…</li>
+      </ul>
+    </div>
+    <div class="menu" data-menu="help">Help
+      <ul>
+        <li data-action="help.about">About DS9 HTTP…</li>
+        <li data-action="help.keys">Keyboard Shortcuts…</li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Info panel: file/object/value | WCS | Image/Physical -->
+  <section id="infobar">
+    <div class="info-col">
+      <div class="info-row"><label>File</label><span id="inf-file">—</span></div>
+      <div class="info-row"><label>Object</label><span id="inf-object">—</span></div>
+      <div class="info-row"><label>Value</label><span id="inf-value">—</span></div>
+    </div>
+    <div class="info-col">
+      <div class="info-row"><label>WCS</label><span id="inf-wcs">—</span></div>
+      <div class="info-row"><label>FK5</label><span id="inf-fk5">—</span></div>
+      <div class="info-row"><label>Galactic</label><span id="inf-gal">—</span></div>
+    </div>
+    <div class="info-col">
+      <div class="info-row"><label>Image</label><span id="inf-image">—</span></div>
+      <div class="info-row"><label>Physical</label><span id="inf-physical">—</span></div>
+      <div class="info-row"><label>Frame</label><span id="inf-frame">frame1</span></div>
+    </div>
+  </section>
+
+  <!-- Two-row button bar mirroring DS9 -->
+  <section id="buttonbar">
+    <div class="btn-row" id="btn-row-main">
+      <button data-cat="file">file</button>
+      <button data-cat="edit">edit</button>
+      <button data-cat="view">view</button>
+      <button data-cat="frame">frame</button>
+      <button data-cat="bin">bin</button>
+      <button data-cat="zoom">zoom</button>
+      <button data-cat="scale" class="active">scale</button>
+      <button data-cat="color">color</button>
+      <button data-cat="region">region</button>
+      <button data-cat="wcs">wcs</button>
+      <button data-cat="analysis">analysis</button>
+    </div>
+    <div class="btn-row" id="btn-row-sub"><!-- filled dynamically --></div>
+  </section>
+
+  <!-- Graph strip: colorbar + panner + magnifier -->
+  <section id="graphs">
+    <div class="graph-cell">
+      <div class="graph-title">colorbar</div>
+      <canvas id="colorbar" width="256" height="20"></canvas>
+    </div>
+    <div class="graph-cell">
+      <div class="graph-title">panner</div>
+      <canvas id="panner" width="128" height="128"></canvas>
+    </div>
+    <div class="graph-cell">
+      <div class="graph-title">magnifier</div>
+      <canvas id="magnifier" width="128" height="128"></canvas>
+    </div>
+  </section>
+
+  <!-- Main viewer canvas -->
+  <section id="viewer">
+    <canvas id="maincanvas"></canvas>
+    <canvas id="overlay"></canvas>
+  </section>
+
+  <!-- Status bar -->
+  <footer id="statusbar">
+    <span id="status-left">Ready</span>
+    <span id="status-right"></span>
+  </footer>
+
+  <!-- Modal -->
+  <div id="modal" class="hidden">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span id="modal-title">—</span>
+        <button id="modal-close">×</button>
+      </div>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
